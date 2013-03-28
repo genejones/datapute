@@ -1,13 +1,10 @@
 var http = require('http');
-var qs = require('querystring');
-var databaseUrl = 'mongodb://nodejitsu:84b32e944d4c96b9bfc9e09b556c809a@linus.mongohq.com:10092/nodejitsudb5529111437';
-collections = ['context'];
-var db = require('mongojs'.connect(databaseUrl, collections);
+var SERVER_TYPE = 'Keystone Datapute NodeJS Unix';
 
 http.createServer(function(req, res) {
   if (req.method.toLowerCase() === 'put') {
     // parse a beacon
-    standardHeads = {"Access-Control-Allow-Origin": '*', 'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':'Keystone Drilldown NodeJS Unix', 'Pragma':'no-cache', }
+    standardHeads = {"Access-Control-Allow-Origin": '*', 'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE, 'Pragma':'no-cache', }
     res.writeHead(200, 'OK', standardHeads);
     var body = '';
     req.on('data', function (data) {
@@ -31,15 +28,14 @@ http.createServer(function(req, res) {
     }
     else{
         if (req.method.toLowerCase() === 'options'){
-            res.writeHead(200, 'OK', {'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':'Keystone Drilldown NodeJS Unix'});
+            res.writeHead(200, 'OK', {'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE});
             res.setHeader('Allow', ['GET','PUT','OPTIONS']);
             res.end('Allow: GET,PUT,OPTIONS'); //technically the body doesn't need anything, this is just to be nice
         }
         else{
-            res.writeHead(405, 'Method Not Allowed', {'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':'Keystone Drilldown NodeJS Unix'});
+            res.writeHead(405, 'Method Not Allowed', {'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE});
             res.end('See what options are allowable using a HTTP OPTIONS'); //the params didn't work right.
         }
     }
   }
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
+}).listen(80);
