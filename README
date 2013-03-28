@@ -1,0 +1,4 @@
+Datapute
+Collects JS objects, sends them as JSON to a nodeJS server, and logs to a database.
+Designed by Gene Jones for Keystone Solutions
+For extension as a analytics collector, currently used for debugging.
