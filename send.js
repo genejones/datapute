@@ -39,7 +39,7 @@ spy.setPostExecutionCallback(check_for_beacons); //send the collector after the 
 
 function make_request(omniture_src){
     var req = new XMLHttpRequest();
-    req.open('PUT', 'http://example.com:1337/', true);
+    req.open('PUT', 'http://keystone-datapute-dev.nodejitsu.com/', true);
     prelim = JSON.parse( JSON.stringify(collector) );
     prelim['pageID'] = pageHash;
     prelim['omniture_src'] = omniture_src;
