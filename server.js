@@ -1,22 +1,16 @@
 var http = require('http');
 var SERVER_TYPE = 'Keystone Datapute NodeJS Unix';
 
-var mongodb = require('mongodb'),
-    db = new mongodb.Db('nodejitsudb5529111437',
-      new mongodb.Server('linus.mongohq.com', 10092, {})
-    );
-
-db.open(function open(err, db_p) {
-  if (err) {
-    throw err;
-  }
-
-  db.authenticate('nodejitsu', '84b32e944d4c96b9bfc9e09b556c809', function authenticate(err, replies) {
-    if (err) {
-      throw err;
-   }
-
-    // You are now connected and authenticated.
+var mongodb = require('mongodb');
+     var db = new mongodb.Db('nodejitsu_gene_nodejitsudb9070767995',
+       new mongodb.Server('ds051977.mongolab.com', 51977, {'journal':true})
+     );
+     
+     
+     db.open(function (err, db_p) {
+       if (err) { throw err; }
+       db.authenticate('nodejitsu_gene', '9e76kjc48m75ji4qgmbp9t88qe', function (err, replies) {
+         // You are now connected and authenticated.
     http.createServer(function(req, res) {
       if (req.method.toLowerCase() === 'put') {
         // parse a beacon
@@ -38,7 +32,7 @@ db.open(function open(err, db_p) {
         }
       else {
         if (req.method.toLowerCase() === 'get'){
-            res.writeHead(200, 'OK', {'content-type': 'text/html'});
+            res.writeHead(200, 'OK', {'content-type': 'text/html', "Access-Control-Allow-Origin": '*','From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE});
             res.write('<html><head><title>Keystone Datapute</title></head>');
             res.write('<body><h1>Keystone Datapute</h1><p>This server collects data. No enduser access. Thanks!</p></body></html>');
             res.end();
@@ -46,7 +40,7 @@ db.open(function open(err, db_p) {
         else{
             if (req.method.toLowerCase() === 'options'){
                 //list all options the API allows for
-                res.writeHead(200, 'OK', {'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE});
+                res.writeHead(200, 'OK', {"Access-Control-Allow-Origin": '*', 'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE});
                 res.setHeader('Allow', ['GET','PUT','OPTIONS']);
                 res.end('Allow: GET,PUT,OPTIONS'); //technically the body doesn't need anything, this is just to be nice
             }
