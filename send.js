@@ -1,7 +1,7 @@
 //requires https://raw.github.com/LiosK/UUID.js/master/src/uuid.core.js to be placed before it
 //only checks for omniture beacons on first run...
 var collector = window._hddata;
-pageHash = UUID.generate(); //a unique pageHash to corelate omniture results with collector items.
+var pageHash = UUID.generate(); //a unique pageHash to corelate omniture results with collector items.
 
 var existingBeacons = [];
 

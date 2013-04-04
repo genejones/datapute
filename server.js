@@ -14,7 +14,7 @@ var mongodb = require('mongodb');
     http.createServer(function(req, res) {
       if (req.method.toLowerCase() === 'put') {
         // parse a beacon
-        standardHeads = {"Access-Control-Allow-Origin": '*', 'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE, 'Pragma':'no-cache'};
+        standardHeads = {"Access-Control-Allow-Origin": '*', 'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE, 'Pragma':'no-cache', 'Access-Control-Allow-Methods':'PUT', 'Access-Control-Allow-Headers': 'Content-Type'};
         res.writeHead(200, 'OK', standardHeads);
         var body = '';
         req.on('data', function (data) {
@@ -32,7 +32,7 @@ var mongodb = require('mongodb');
         }
       else {
         if (req.method.toLowerCase() === 'get'){
-            res.writeHead(200, 'OK', {'content-type': 'text/html', "Access-Control-Allow-Origin": '*','From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE});
+            res.writeHead(200, 'OK', {'content-type': 'text/html', "Access-Control-Allow-Origin": '*','From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE, 'Access-Control-Allow-Methods':'PUT', 'Access-Control-Allow-Headers': 'Content-Type'});
             res.write('<html><head><title>Keystone Datapute</title></head>');
             res.write('<body><h1>Keystone Datapute</h1><p>This server collects data. No enduser access. Thanks!</p></body></html>');
             res.end();
@@ -40,8 +40,8 @@ var mongodb = require('mongodb');
         else{
             if (req.method.toLowerCase() === 'options'){
                 //list all options the API allows for
-                res.writeHead(200, 'OK', {"Access-Control-Allow-Origin": '*', 'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE});
                 res.setHeader('Allow', ['GET','PUT','OPTIONS']);
+                res.writeHead(200, 'OK', {"Access-Control-Allow-Origin": '*', 'content-type': 'text/plain', 'From':'gjones@keystonesolutions.com', 'Server':SERVER_TYPE, 'Access-Control-Allow-Methods':'PUT', 'Access-Control-Allow-Headers': 'Content-Type'});
                 res.end('Allow: GET,PUT,OPTIONS'); //technically the body doesn't need anything, this is just to be nice
             }
             else{
