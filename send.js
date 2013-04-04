@@ -14,7 +14,7 @@ if (!window.s.doPlugins) { window.s.doPlugins= function (s) {window.make_request
 
 function make_request(s){
     var req = new XMLHttpRequest();
-    req.open('POST', 'http://keystone-datapute-dev.nodejitsu.com/', true);
+    req.open('PUT', 'http://keystone-datapute-dev.nodejitsu.com/', true);
     base_obj = {'collector': collector, 'pageID': pageHash, 'last_s_call': s_i_homedepot.src};
     console.log(base_obj);
     req.send( JSON.stringify(base_obj) );
